@@ -1,0 +1,200 @@
+﻿\documentclass[11pt]{amsart}
+
+\newcommand{\AUTHORNAME}{Yitzchak Shmalo}
+\newcommand{\AFFILIATION}{Einstein Institute of Mathematics, The Hebrew University of Jerusalem, Jerusalem, Israel}
+\newcommand{\AUTHOREMAIL}{yitzchak.shmalo@gmail.com}
+\newcommand{\FUNDING}{The research presented in this paper was supported by the European Research Council (ERC) under the European Union's Horizon Europe research and innovation programme (grant agreement No.~101041711), by the Simons Foundation as part of the Collaboration on the Mathematical and Scientific Foundations of Deep Learning, by Heights Labs, by Convex Nexus Capital, by the Israel Science Foundation (grant number 2258/19), and by the Israel Science Foundation (ISF Grant 4101/25).}
+\newcommand{\ACKNOWLEDGMENTS}{}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1.15in]{geometry}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage[capitalise,nameinlink]{cleveref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\crefname{theorem}{Theorem}{Theorems}
+\crefname{proposition}{Proposition}{Propositions}
+\crefname{lemma}{Lemma}{Lemmas}
+\crefname{corollary}{Corollary}{Corollaries}
+\crefname{remark}{Remark}{Remarks}
+\crefname{section}{Section}{Sections}
+
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\U}{\mathrm{U}}
+
+\begin{document}
+
+\title[Complete mixability for large $n$]{Absolutely continuous laws on a bounded interval are completely mixable for all large $n$}
+
+\author{\AUTHORNAME}
+\address{\AFFILIATION}
+\email{\AUTHOREMAIL}
+
+\subjclass[2020]{Primary 60E05; Secondary 91B30}
+\keywords{Complete mixability, joint mixability, dependence with fixed margins, constant sum, quantile coupling}
+
+\begin{abstract}
+A distribution $F$ is $n$-completely mixable if there are $n$ random variables, each with law $F$, whose sum is almost surely constant. Puccetti, Wang and Wang proved that a law on $[a,b]$ whose density is at least $3/(n(b-a))$ on all of $[a,b]$ is $n$-completely mixable, and Wang asked whether every absolutely continuous law on a bounded interval is $n$-completely mixable for all sufficiently large $n$. We answer this in the affirmative, and more generally show that every law on a bounded interval with a nonzero absolutely continuous part is $n$-completely mixable for all large $n$. The main step is quantitative: a law on an interval of length $R$ that dominates $q$ times the uniform law on an interval of length $2H$ is $n$-completely mixable for every $n\ge(6R/H+1)/q$, whatever the rest of the law is. Its proof couples the copies outside the uniform component on a quantile grid, so that their sum is within $R$ of its mean, and absorbs the error by linear tilts of the uniform copies that average out to the uniform law. The general case follows by grouping the copies in pairs, since the law of the sum of two independent copies dominates a measure with a continuous nonzero density.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+Let $F$ be a distribution on $\mathbb R$ with finite mean $\mu$. Following \cite{WW11,PWW12}, $F$ is \emph{$n$-completely mixable} ($n$-CM) if there are random variables $X_1,\dots,X_n$, each with law $F$, such that $X_1+\dots+X_n=n\mu$ almost surely. A tuple $(F_1,\dots,F_n)$ is \emph{jointly mixable} if there are $X_i\sim F_i$ with almost surely constant sum \cite{WW16}. Complete mixability is the extremal negative dependence behind sharp bounds on the distribution of a sum with given marginals, in particular worst-case Value-at-Risk \cite{WW11,PWW12,Wang15}.
+
+If the convex hull of the support of $F$ is $[a,b]$ with $a<b$, then $n$-CM forces $a+(b-a)/n\le\mu\le b-(b-a)/n$. For laws with monotone densities this mean condition is also sufficient \cite{WW11}. Puccetti, Wang and Wang \cite{PWW13} showed that a law on $[a,b]$ with density $f\ge 3/(n(b-a))$ on $[a,b]$ is $n$-CM, so a law whose density is bounded away from zero on its support interval is $n$-CM for all large $n$. In the survey \cite[Open Problem~7]{Wang15}, Wang asks whether the lower bound can be removed: is every absolutely continuous law on a bounded interval $n$-CM for all sufficiently large $n$? We show that it can. A family of laws proposed in \cite{YZ} as a negative answer is treated in \cref{rem:yz}.
+
+\begin{theorem}\label{thm:op7}
+Let $F$ be a distribution supported in a bounded interval whose absolutely continuous part is not zero. Then there is $N(F)$ such that $F$ is $n$-CM for every $n\ge N(F)$. In particular this holds for every absolutely continuous distribution on a bounded interval.
+\end{theorem}
+
+\cref{thm:op7} rests on a quantitative statement for laws that contain a uniform piece. For measures write $F\ge qG$ if $F-qG$ is a nonnegative measure.
+
+\begin{theorem}\label{thm:main}
+Let $F$ be a distribution supported in an interval of length $R$, and suppose $F\ge q\,\U[c-H,c+H]$ for some $c\in\mathbb R$, $H>0$ and $q\in(0,1]$. Then $F$ is $n$-CM for every integer $n\ge(6R/H+1)/q$.
+\end{theorem}
+
+Nothing is assumed about $F-q\,\U[c-H,c+H]$: it may have gaps, atoms or a singular part. For example $q\,\U[0,1]+(1-q)\delta_{10}$ is $n$-CM for $n\ge 121/q$. A lower bound of order $1/q$ cannot be avoided: $q\,\U[0,1]+(1-q)\delta_0$ has mean $q/2$ and support hull $[0,1]$, so it violates the mean condition and is not $n$-CM for $n<2/q$.
+
+The proof of \cref{thm:main} works as follows. About $n(1-q)$ of the copies are drawn from the rest of $F$ by a quantile-grid coupling, which makes their sum deterministic up to an error of at most $R$ and exactly right on average. The remaining copies are drawn from tilted versions of the uniform piece. A linear tilt moves the mean of a uniform law without leaving the class of monotone densities, so the tilted copies can be completely mixed to the sum that the error requires. Because the error has mean zero, the tilts average out and every copy has law $F$. To deduce \cref{thm:op7} we group the copies in pairs. If $X,X'$ are independent with law $F$, the law of $X+X'$ dominates a multiple of a uniform law, because the convolution of a bounded density with itself is continuous. A joint version of \cref{thm:main} with one extra variable handles odd $n$.
+
+\section{Two ingredients}
+
+We use the linear densities
+\[
+L_{H,\beta}(z)=\frac{1}{2H}\Bigl(1+\beta\frac zH\Bigr),\qquad |z|\le H,\quad |\beta|\le1,
+\]
+on $[-H,H]$. $L_{H,\beta}$ is a probability density, increasing for $\beta\ge0$ and decreasing for $\beta\le0$, with mean $\beta H/3$. It is affine in $\beta$: if $\beta$ is a random variable with $|\beta|\le1$, the mixture $\E[L_{H,\beta}]$ equals $L_{H,\E\beta}$, and it is the uniform density $L_{H,0}$ exactly when $\E\beta=0$.
+
+\begin{lemma}\label{lem:tilt}
+If $k\ge3$ and $|\beta|\le1$, then $L_{H,\beta}$ is $k$-CM. That is, there are $Z_1,\dots,Z_k$ with density $L_{H,\beta}$ and $Z_1+\dots+Z_k=k\beta H/3$ almost surely.
+\end{lemma}
+
+\begin{proof}
+A distribution with a monotone density on $[-H,H]$ is $k$-CM if and only if its mean lies in $[-H+2H/k,\,H-2H/k]$ \cite{WW11}; see also \cite[Theorem~3.2]{WW16}, applied to $k$ equal marginals, and use $X\mapsto-X$ for increasing densities. The mean of $L_{H,\beta}$ is at most $H/3$ in absolute value, and $H/3\le H-2H/k$ for $k\ge3$.
+\end{proof}
+
+\begin{lemma}\label{lem:grid}
+Let $T$ be a distribution supported in an interval of length $L$, with mean $m_T$ and quantile function $Q_T$, and let $k\ge1$. Let $W$ be uniform on $[0,1)$, and let $\sigma$ be a uniformly random bijection from $\{1,\dots,k\}$ to $\{0,\dots,k-1\}$ independent of $W$. Then $Y_i=Q_T\bigl((\sigma(i)+W)/k\bigr)$ has law $T$ for each $i$, and the sum $S=Y_1+\dots+Y_k$ satisfies $\E S=km_T$ and $|S-km_T|\le L$.
+\end{lemma}
+
+\begin{proof}
+Given $\sigma(i)=j$, the point $(j+W)/k$ is uniform on $[j/k,(j+1)/k)$, and $j$ is uniform on $\{0,\dots,k-1\}$, so $(\sigma(i)+W)/k$ is uniform on $[0,1)$ and $Y_i\sim T$. Hence $\E S=km_T$. Since $Q_T$ is nondecreasing, both $Q_T((j+W)/k)$ and $k\int_{j/k}^{(j+1)/k}Q_T(u)\,du$ lie in $[Q_T(j/k+),Q_T((j+1)/k-)]$, and summing over $j$ gives
+\[
+|S-km_T|\le\sum_{j=0}^{k-1}\bigl(Q_T((j+1)/k-)-Q_T(j/k+)\bigr)\le L. \qedhere
+\]
+\end{proof}
+
+\section{Laws with a uniform piece}
+
+We prove a joint version of \cref{thm:main} with one extra variable; \cref{thm:main} is the case $E=\delta_0$.
+
+\begin{proposition}\label{prop:joint}
+Let $G$ be a distribution supported in an interval of length $R$ with $G\ge q\,\U[c-H,c+H]$, where $q\in(0,1]$ and $H>0$, and let $E$ be a distribution supported in an interval of length $L\ge0$. If
+\[
+N\ge\frac1q\Bigl(\frac{3(2R+L)}{H}+1\Bigr),
+\]
+then the tuple $(G,\dots,G,E)$, with $N$ copies of $G$, is jointly mixable: there are $X_1,\dots,X_N\sim G$ and $Y\sim E$ with $X_1+\dots+X_N+Y$ almost surely constant.
+\end{proposition}
+
+\begin{proof}
+Write $G=q\,\U[c-H,c+H]+(1-q)\,T$, where for $q<1$ the law $T=(G-q\,\U[c-H,c+H])/(1-q)$ is supported in the same interval of length $R$ as $G$ (for $q=1$ the choice of $T$ does not matter). Let $m_T$ and $m_E$ be the means of $T$ and $E$, so that the mean of $G$ is $\mu=qc+(1-q)m_T$, and $|m_T-c|\le R$.
+
+Let $m=N(1-q)$, $k_0=\lfloor m\rfloor$, and let $K$ equal $k_0$ with probability $k_0+1-m$ and $k_0+1$ with probability $m-k_0$, so that $\E K=m$ and $|K-m|<1$. Since $2H\le R$, every value $k$ of $K$ satisfies
+\begin{equation}\label{eq:fat}
+N-k>N-m-1=Nq-1\ge\frac{3(2R+L)}{H}\ge 12 .
+\end{equation}
+
+\emph{Construction.} Let $Y\sim E$ be independent of everything else. Given $K=k$, choose a uniformly random set $A\subset\{1,\dots,N\}$ of $k$ positions. On $A$ put the variables $Y_i$ of \cref{lem:grid} for $T$ and $k$, with their own randomness $W,\sigma$, and let $S=\sum_{i\in A}Y_i$ ($S=0$ if $k=0$). Set
+\[
+C=N\mu+m_E-S-Y-(N-k)c,\qquad \beta=\frac{3C}{(N-k)H}.
+\]
+Off $A$ put $X_i=c+Z_i$, where, conditionally on $K$, $A$, $W$, $\sigma$ and $Y$, the variables $(Z_i)_{i\notin A}$ have density $L_{H,\beta}$ and sum $C$. This is possible by \cref{lem:tilt} with $N-k\ge3$ copies once $|\beta|\le1$, since the sum it gives is $(N-k)\beta H/3=C$. (If $T$ and $E$ are finitely supported, $S$ and $Y$ take finitely many values, so $\beta$ does too and the conditional laws can be chosen value by value. We first prove the proposition in that case. For general $T$ and $E$, take finitely supported $T_j\to T$ and $E_j\to E$ weakly, supported in the same intervals, and let $G_j=q\,\U[c-H,c+H]+(1-q)T_j$. The bound on $N$ does not depend on $j$, so for each $j$ there are $X^{(j)}_i\sim G_j$ and $Y^{(j)}\sim E_j$ whose sum equals the sum of the means. Their joint laws live on a fixed compact set; a weak limit point has marginals $G$ and $E$, and it is carried by the closed set where the sum equals the sum of the means of $G$ and $E$, because those means converge. Alternatively, the conditional laws can be chosen measurably in $\beta$ directly, by the Kuratowski--Ryll-Nardzewski selection theorem \cite[Chapter~18]{AB06}.) On $A$ put $X_i=Y_i$. Then
+\[
+X_1+\dots+X_N+Y=S+(N-k)c+C+Y=N\mu+m_E .
+\]
+
+\emph{The tilt is admissible.} Using $N\mu=(N-m)c+m\,m_T$,
+\[
+C=(m-k)(m_T-c)-(S-k\,m_T)-(Y-m_E),
+\]
+so $|C|\le R+R+L$ by \cref{lem:grid}, and $|\beta|\le 3(2R+L)/((N-k)H)<1$ by \eqref{eq:fat}.
+
+\emph{The marginals.} $Y\sim E$ by construction. By the exchangeability of $A$, position $i$ lies in $A$ with probability $\E K/N=1-q$. Given $i\in A$ and $K=k$, $X_i=Y_i$ has law $T$ by \cref{lem:grid}, whatever $k$ is, so given $i\in A$ its law is $T$. Given $i\notin A$, the law of $X_i-c$ is the mixture of $L_{H,\beta}$ over the conditional law of $\beta$ given $i\notin A$, which is $L_{H,\bar\beta}$ with
+\[
+\bar\beta=\frac{\E\bigl[(N-K)\beta\bigr]}{\E[N-K]}=\frac{3\,\E C}{NqH}.
+\]
+Since $\E[S\mid K]=Km_T$ and $\E Y=m_E$, we get $\E C=(m-\E K)(m_T-c)=0$, so $X_i-c$ is uniform on $[-H,H]$. Therefore every $X_i$ has law $q\,\U[c-H,c+H]+(1-q)T=G$.
+\end{proof}
+
+\begin{proof}[Proof of \cref{thm:main}]
+Apply \cref{prop:joint} with $G=F$, $E=\delta_0$ and $L=0$.
+\end{proof}
+
+\begin{remark}
+Two features keep the error bounded. Rounding $K$ to one of the two integers next to its mean leaves an error at most $|m_T-c|\le R$ from the count, instead of the order $\sqrt n\,R$ of independent sampling, and the quantile grid makes the sum of the $T$-copies deterministic up to $R$. Both errors have mean zero, which is what lets the tilts average out. For a density with $f\ge\delta$ on all of $[a,b]$, \cref{thm:main} with $H=(b-a)/2$ and $q=\delta(b-a)$ gives $n\ge13/(\delta(b-a))$, compared with $n\ge3/(\delta(b-a))$ in \cite{PWW13}; the gain is that the uniform piece may be small and narrow.
+\end{remark}
+
+\section{Proof of \texorpdfstring{\cref{thm:op7}}{Theorem 1.1}}
+
+\begin{lemma}\label{lem:conv}
+Let $F$ be a distribution supported in a bounded interval with a nonzero absolutely continuous part, and let $X,X'$ be independent with law $F$. Then the law $F^{*2}$ of $X+X'$ satisfies $F^{*2}\ge q\,\U[c-H,c+H]$ for some $c$, some $H>0$ and some $q>0$.
+\end{lemma}
+
+\begin{proof}
+Let $f$ be the density of the absolutely continuous part of $F$. For $M$ large, $g=\min(f,M)$ is a nonzero bounded integrable function with $F\ge g\,dx$. Then $F^{*2}\ge (g*g)\,dx$. The function $g*g$ is continuous, since $|g*g(x)-g*g(x')|\le M\int|g(x-y)-g(x'-y)|\,dy$ and translation is continuous in $L^1$, and it has integral $(\int g)^2>0$. So $g*g\ge\delta>0$ on some interval $[c-H,c+H]$, and $F^{*2}\ge 2H\delta\,\U[c-H,c+H]$.
+\end{proof}
+
+\begin{lemma}\label{lem:lift}
+Let $F$ be a distribution with finite mean, and let $X,X'$ be independent with law $F$. If the tuple consisting of $a$ copies of $F^{*2}$ and $b\in\{0,1\}$ copies of $F$ is jointly mixable, then $F$ is $(2a+b)$-CM.
+\end{lemma}
+
+\begin{proof}
+Let $P_1,\dots,P_a\sim F^{*2}$ and, if $b=1$, $Y\sim F$ have constant sum. Let $\kappa(s,\cdot)$ be a regular conditional distribution of $(X,X')$ given $X+X'=s$. Conditionally on $(P_1,\dots,P_a,Y)$, draw $(X_{2i-1},X_{2i})$ from $\kappa(P_i,\cdot)$ independently over $i$. Then $(X_{2i-1},X_{2i})$ has the law of $(X,X')$, so each $X_j$ has law $F$, and $X_{2i-1}+X_{2i}=P_i$ almost surely. Hence $\sum_jX_j+bY=\sum_iP_i+bY$ is constant, and the $2a+b$ variables $X_1,\dots,X_{2a}$ (and $Y$) have law $F$ and constant sum.
+\end{proof}
+
+\begin{proof}[Proof of \cref{thm:op7}]
+Let $F$ be supported in an interval of length $R$. Then $F^{*2}$ is supported in an interval of length $2R$, and by \cref{lem:conv} $F^{*2}\ge q\,\U[c-H,c+H]$ for some $q,H>0$. By \cref{prop:joint} with $G=F^{*2}$, the tuple of $a$ copies of $F^{*2}$ is jointly mixable (take $E=\delta_0$) for $a\ge(12R/H+1)/q$, and the tuple of $a$ copies of $F^{*2}$ and one copy of $F$ is jointly mixable (take $E=F$, $L=R$) for $a\ge(15R/H+1)/q$. By \cref{lem:lift}, $F$ is $n$-CM for every even $n\ge2(12R/H+1)/q$ and every odd $n\ge2(15R/H+1)/q+1$. Take $N(F)=2(15R/H+1)/q+1$.
+\end{proof}
+
+\section{Remarks}
+
+\begin{remark}
+The bound $N(F)$ from the proof depends on how large a uniform piece $F^{*2}$ contains, which is not controlled by simple parameters of $F$. When $F$ itself has a uniform piece, \cref{thm:main} gives the explicit bound $(6R/H+1)/q$.
+\end{remark}
+
+\begin{remark}
+Puccetti, Wang and Wang conjectured \cite[Section~6]{PWW12} that every distribution on a finite interval is $n$-CM for $n$ large enough. \cref{thm:op7} proves this for laws with a nonzero absolutely continuous part, and some such condition is needed: a Bernoulli law with parameter $p\notin\mathbb Q$ is not $n$-CM for any $n$, since the sum of $n$ copies would be an integer equal to $np$. On the other hand the proof only uses that some convolution power $F^{*j}$ dominates a multiple of a uniform law. Grouping the copies in blocks of $j$ and letting the remaining $r<j$ copies form the extra variable, with law $F^{*r}$, gives the same conclusion for every $F$ on a bounded interval some convolution power of which has a nonzero absolutely continuous part (by \cref{lem:conv} applied to that power).
+\end{remark}
+
+\begin{remark}\label{rem:yz}
+Yin and Zhu \cite[Section~2]{YZ} consider the laws $F$ on $(-1,1)$ with density $f=\sum_{m\ge1}\alpha_mf_m$, where $f_m(x)=C_mx^{2m}(1-x^2)^{-1/2}$ is normalized and $\alpha_m>0$ with $\sum_m\alpha_m=1$, and state that such a law is not $(2n+1)$-CM for any $n\ge1$, as a negative answer to \cite[Open Problem~7]{Wang15}. These laws satisfy the hypothesis of \cref{thm:main} with explicit constants. The function $x^2(1-x^2)^{-1/2}$ is increasing on $[0,1)$ and $C_1=2/\pi$, so $f\ge\alpha_1f_1\ge\alpha_1/(\pi\sqrt3)$ on $[1/2,3/4]$ and $F\ge q\,\U[1/2,3/4]$ with $q=\alpha_1/(4\pi\sqrt3)$. With $R=2$ and $H=1/8$, \cref{thm:main} shows that $F$ is $n$-CM for every $n\ge 388\pi\sqrt3/\alpha_1$, in particular for every $n\ge2112/\alpha_1$. The criterion of \cite[Example~2.1]{YZ} applies to $2n+1$ copies of a symmetric law on $[-1,1]$ only when $\Pr(|X|\le n/(n+1))\le1/(2n+1)$, and for these laws the left side tends to $1$ as $n\to\infty$.
+\end{remark}
+
+\begin{remark}
+The identities used in the proof of \cref{prop:joint} (the quantile-grid bound and the mean of $S$, the bound $|C|\le2R+L$, $|\beta|\le1$, $N-K\ge3$, and $\E C=0$) were also checked in exact rational arithmetic for $1000$ random choices of $G$ with $T$ discrete (the extreme case for the grid bound), a discrete extra law $E$ with $L\in\{0,R/2,R,3R/2\}$, and three values of $N$ from the bound of \cref{prop:joint} upward, with no failure; the script accompanies the paper.
+\end{remark}
+
+\section*{Acknowledgements and funding}
+\ACKNOWLEDGMENTS\FUNDING
+
+\section*{Declaration of competing interest}
+The author holds equity in Heights Labs and in Convex Nexus Capital and has a management role at Convex Nexus Capital. These entities are included in the funding declaration above.
+
+\section*{Declaration of generative AI and AI-assisted technologies}
+The paper comes out of Math Brain, an ongoing project on the use of AI systems for research mathematics. In October 2026 Claude Opus~5.5 (Anthropic), working in Claude Code as a research task of that project, found the constructions, proved the results, checked the identities in exact arithmetic and wrote the paper. In November 2026 Claude Opus~5.5 checked the proofs and the literature again and revised the paper. These checks are not peer review. The author directed the work and is responsible for the content of the paper and for decisions concerning its dissemination.
+
+\bibliographystyle{amsplain}
+\bibliography{references}
+
+\end{document}
